@@ -65,6 +65,9 @@ def checkout():
 
 @app.route('/admin')
 def admin():
+    products = Product.query.all()
+
+    
     return render_template('admin/index.html', admin=True)
 
 
