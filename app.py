@@ -45,12 +45,15 @@ class AddProduct(FlaskForm):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    products = Product.query.all()
+    return render_template('index.html',products=products)
 
 
-@app.route('/product')
-def product():
-    return render_template('view-product.html')
+@app.route('/product/<id>')
+def product(id):
+    product = Product.query.filter_by(id=id).first()
+
+    return render_template('view-product.html',product=product)
 
 
 @app.route('/cart')
