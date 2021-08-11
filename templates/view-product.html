@@ -3,7 +3,7 @@
 {% block title %}View Product | Maipi Fashion Store{% endblock %}
 
 {% block body %}
-<div class="row">
+<div class="row" xmlns="http://www.w3.org/1999/html">
 	<div class="col-lg-12">
 		<ol class="breadcrumb">
 			<li>
@@ -29,30 +29,52 @@
 				<h3 class="panel-title">Product Details</h3>
 			</div>
 			<div class="panel-body">
-				<h3>{{product.name}} &nbsp; <small>(In Stock)</small></h3>
+				<h3>{{product.name}} &nbsp;
+					{%if product.stock> 0 %}
+					<small>(In Stock)</small>
+					{% else %}
+					<small>(Out of Stock)</small>
+					{% endif %}
+					</h3>
 				<h4>R{{'%0.2f'| format(product.price|float)}}</h4>
 				<hr />
 				{{product.description}}
 				<hr />
-
+			<form action="{{url_for('add_to_cart')}}">
+				{%if product.stock> 0 %}
 				<div class="row">
 					<div class="col-lg-4">
 						<div class="row">
+
 							<div class="col-lg-12">
 								Quantity
 							</div>
 							<div class="col-lg-12">
-								<input type="number" name="number" id="inputColor" class="form-control" value="1" autocomplete="off" step="1" min="1">
+
+									{{ form.csrf_token}}
+									
+								{{form.quantity(class='form-control',type='number',min=1 ,max=product.stock,step=1,value=1)}}
+
 							</div>
+							{% endif %}
 						</div>
 					</div>
 				</div>
+
 			</div>
 			<div class="panel-footer">
-				<button type="button" class="btn btn-primary">
-					<i class="glyphicon glyphicon-shopping-cart"></i> Add To Cart
-				</button>
+				{%if product.stock> 0 %}
+					<button type="submit" class="btn btn-primary">
+						<i class="glyphicon glyphicon-shopping-cart"></i> Add To Cart
+					</button>
+				{% else %}
+					<button type="button" disabled="disabled" class="btn btn-primary">
+						<i class="glyphicon glyphicon-shopping-cart"></i> Add To Cart
+					</button>
+				{% endif %}
+
 			</div>
+				</form>
 		</div>
 
 		<div role="tabpanel">

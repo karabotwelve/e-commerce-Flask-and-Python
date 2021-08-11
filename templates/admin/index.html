@@ -71,7 +71,7 @@
 				<table class="table table-striped table-bordered">
 					<thead>
 						<tr>
-							<th>#</th><th>Name</th><th>Price</th><th>Stock</th>
+							<th>#</th><th>Name</th><th>Price</th><th>Stock</th><th>Edit/Remove</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -83,6 +83,7 @@
 							<td>R{{'%0.2f'| format(p.price|float)}}</td>
 
 							<td>{{p.stock}} units</td>
+							<td>edit/delete</td>
 						</tr>
 
 						{% endfor %}

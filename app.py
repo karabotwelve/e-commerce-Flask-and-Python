@@ -43,17 +43,27 @@ class AddProduct(FlaskForm):
     image = FileField('Image', validators=[FileAllowed(IMAGES, 'Only images are allowed')])
 
 
+class AddedToCart(FlaskForm):
+    quantity = IntegerField('Quantity')
+
+
 @app.route('/')
 def index():
     products = Product.query.all()
-    return render_template('index.html',products=products)
+    return render_template('index.html', products=products)
 
 
 @app.route('/product/<id>')
 def product(id):
     product = Product.query.filter_by(id=id).first()
+    form = AddedToCart()
 
-    return render_template('view-product.html',product=product)
+    return render_template('view-product.html', product=product, form=form)
+
+
+@app.route('/add-to-cart')
+def add_to_cart():
+    return redirect(url_for('index'))
 
 
 @app.route('/cart')
