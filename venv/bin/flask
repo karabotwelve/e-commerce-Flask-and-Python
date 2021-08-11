@@ -1,5 +1,5 @@
 #!/bin/sh
-'''exec' "/home/karabo/Documents/Workspace/Udemy Courses/REST APIs with Flask and Python/stores-rest-api-master/venv/bin/python" "$0" "$@"
+'''exec' "/home/karabo/Documents/Workspace/My Projects/e-commerce Flask and Python/venv/bin/python" "$0" "$@"
 ' '''
 # -*- coding: utf-8 -*-
 import re

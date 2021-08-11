@@ -44,7 +44,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV='/home/karabo/Documents/Workspace/Udemy Courses/REST APIs with Flask and Python/stores-rest-api-master/venv'
+VIRTUAL_ENV='/home/karabo/Documents/Workspace/My Projects/e-commerce Flask and Python/venv'
 if ([ "$OSTYPE" = "cygwin" ] || [ "$OSTYPE" = "msys" ]) && $(command -v cygpath &> /dev/null) ; then
     VIRTUAL_ENV=$(cygpath -u "$VIRTUAL_ENV")
 fi

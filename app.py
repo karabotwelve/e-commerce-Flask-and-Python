@@ -4,7 +4,7 @@ from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 from flask_uploads import UploadSet, configure_uploads, IMAGES
 from flask_wtf import FlaskForm
-from wtforms import Form, StringField, IntegerField,FloatField, TextAreaField, FileField
+from wtforms import Form, StringField, IntegerField, FloatField, TextAreaField, FileField
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 
 app = Flask(__name__)
@@ -40,7 +40,7 @@ class AddProduct(FlaskForm):
     price = FloatField('Price')
     stock = IntegerField('Stock')
     description = TextAreaField('Description')
-    image = FileField('Image',validators=[FileAllowed(IMAGES,'Only images are allowed')])
+    image = FileField('Image', validators=[FileAllowed(IMAGES, 'Only images are allowed')])
 
 
 @app.route('/')
@@ -67,24 +67,26 @@ def checkout():
 def admin():
     products = Product.query.all()
 
-    
-    return render_template('admin/index.html', admin=True)
+    products_available = Product.query.filter(Product.stock > 0).count()
+
+    return render_template('admin/index.html', admin=True, products=products, products_available=products_available)
 
 
-@app.route('/admin/add',methods=['GET','POST'])
+@app.route('/admin/add', methods=['GET', 'POST'])
 def add():
-        form = AddProduct() # creates the object of the class
+    form = AddProduct()  # creates the object of the class
 
-        if form.validate_on_submit():
-            image_url =photos.url(photos.save(form.image.data)) # Gets the location of the iamge
+    if form.validate_on_submit():
+        image_url = photos.url(photos.save(form.image.data))  # Gets the location of the iamge
 
-            new_product = Product(name=form.name.data,price=form.price.data,stock=form.stock.data,description=form.description.data,image=image_url)
-            db.session.add(new_product)
-            db.session.commit()
+        new_product = Product(name=form.name.data, price=form.price.data, stock=form.stock.data,
+                              description=form.description.data, image=image_url)
+        db.session.add(new_product)
+        db.session.commit()
 
-            return redirect(url_for('admin'))
+        return redirect(url_for('admin'))
 
-        return render_template('admin/add-product.html', admin=True,form=form)
+    return render_template('admin/add-product.html', admin=True, form=form)
 
 
 @app.route('/admin/order')

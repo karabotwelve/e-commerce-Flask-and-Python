@@ -10,7 +10,7 @@ alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PA
 # Unset irrelevant variables.
 deactivate nondestructive
 
-setenv VIRTUAL_ENV '/home/karabo/Documents/Workspace/Udemy Courses/REST APIs with Flask and Python/stores-rest-api-master/venv'
+setenv VIRTUAL_ENV '/home/karabo/Documents/Workspace/My Projects/e-commerce Flask and Python/venv'
 
 set _OLD_VIRTUAL_PATH="$PATH:q"
 setenv PATH "$VIRTUAL_ENV:q/bin:$PATH:q"
