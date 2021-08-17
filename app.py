@@ -42,8 +42,10 @@ class AddUser(FlaskForm):
     surname = StringField('Surname')
     username = StringField('Username')
     phone = StringField('Phone')
-    address = TextAreaField('Address')
+    address = StringField('Address')
     gender = StringField('Gender')
+    password = StringField('Password')
+    conpass = StringField('ConPass')
 
 
 class Product(db.Model):
@@ -168,8 +170,8 @@ def adduser():
 
     if form.validate_on_submit():
 
-        new_user = UserModel(name=form.name.data, surname=form.price.data, username=form.username.data,
-                              phone=form.phone.data, address=form.address.data,gender=form.gender)
+        new_user = UserModel(name=form.name.data, surname=form.surname.data, username=form.username.data,
+                              phone=form.phone.data, address=form.address.data,gender=form.gender.data,password=form.password.data)
         db.session.add(new_user)
         db.session.commit()
 
